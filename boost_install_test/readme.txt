@@ -8,4 +8,4 @@ boost库安装方法
               boost头文件在: /usr/local/include/boost
 6. 测试boost的官方代码在: boost_install_test.cpp
 7. 测试方法: 调用c++编译器编译代码,编译成功，则表示我们已经安装成功。
-            c++ -I /usr/local/include/ boost_install_test.cpp -o test.o -L /usr/local/lib/ -lboost_regex
+            g++ -I /usr/local/include/ boost_install_test.cpp -o test.o -L /usr/local/lib/ -lboost_regex
