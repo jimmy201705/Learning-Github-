@@ -272,3 +272,48 @@
 
     作业统计表
 
+1.8 动态库: BllFir, 业务逻辑层
+
+    CTableBaseBll 固定表格业务逻辑类的虚基类
+    
+    单位名称表
+    CInfoCompanyAccessBll 本地Access数据库单位名称表业务逻辑类
+    CInfoCompanySockBll 服务器单位名称表业务逻辑类
+    
+    通道表
+    CInfoChannelAccessBll 本地Access数据库通道表业务逻辑类
+    CInfoChannelSocketBll 服务器通道表业务逻辑类
+    
+    卡片表
+    CInfoCardAccessBll 本地Access数据库卡片表业务逻辑类
+    CInfoCardSocketBll 服务器卡片表业务逻辑类
+    
+    用户表
+    CInfoUserAccessBll 本地Access数据库用户表业务逻辑类
+    CInfoUserSocketBll 服务器用户表业务逻辑类
+    
+    操作员表
+    CInfoOperatorAccessBll 本地Access数据库操作员表业务逻辑类
+    CInfoOperatorSocketBll 服务器操作员表业务逻辑类
+    
+    假日表
+    CInfoHolidayAccessBll 本地Access数据库假日表业务逻辑类
+    CInfoHolidaySocketBll 服务器假日表业务逻辑类
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
