@@ -220,8 +220,8 @@
     CVehicleOutAccessDlg 单机版车辆外出放行对话框.
     CVehicleOutAccessAddDlg 单机版新增车辆外出放行记录对话框类
     CVehicleOutAccessModDlg 单机版修改车辆外出放行记录对话框类
-    CVehicleOutAddAccessDlg 单机版新增车辆外出放行记录对话框.
-    CVehicleOutModAccessDlg 单机版修改车辆外出放行记录对话框.
+?   CVehicleOutAddAccessDlg 单机版新增车辆外出放行记录对话框.
+?   CVehicleOutModAccessDlg 单机版修改车辆外出放行记录对话框.
 
     CVehicleOutSocketDlg 网络版车辆外出放行对话框类
     CVehicleOutSocketAddDlg 网络版新增车辆外出放行记录对话框类
