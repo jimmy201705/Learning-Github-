@@ -1,0 +1,274 @@
+第一章 停车场软件总体要求
+
+    编成网络版软件, 采用CS架构, 由服务器端和客户端两个独立的软件构成. 实现卡片或者车牌作为车辆入场、出场和收取停车费的识别码.
+    用户分为固定用户和临时用户. 固定用户在物业定期缴费, 临时用户出场时缴费.
+
+第二章 数据库设计
+    
+    服务器端采用microsoft SQL Server数据库, 作为整个系统的主数据库. 客户端在网络正常时, 直接与服务器端通讯进行数据交换；网络不通时,使用Access
+数据库作为数据缓存.
+    详细数据表见附件: 数据库所有表格.xls
+
+第三章 程序系统设计
+    
+    程序设计采用三层架构, 分为: 界面层, 业务逻辑层和数据操作层. 
+
+一. 客户端程序
+1.1 主程序: UIMain, 界面层, 程序主界面
+   
+    CModeDlg 工作模式选择对话框类. 选择客户端是运行单机版还是网络版.
+    
+	  CLoginDlg 登录对话框类
+    CLoginAccessDlg 单机版登录对话框类, CLoginDlg类的派生类.
+	  CLoginSocketDlg 网络版登录对话框类, CLoginDlg类的派生类.
+
+	  CPreviewWnd 视频显示子窗口类
+	  CContainerWnd 容器窗口类
+	  CContainerLocalWnd 单机版客户端容器窗口类, CContainerWnd类的派生类
+	  CContainerSockWnd  网络版客户端容器窗口类, CContainerWnd类的派生类
+
+	  CClientLocalDlg 单机版客户端对话框类
+	  CClientSockDlg  网络版客户端对话框类
+	  CUIMainLocalDlg 单机版客户端对话框类(用于编写菜单响应函数), CclientLocalDlg类的派生类
+	  CUIMainSockDlg  网络版客户端对话框类(用于编写菜单响应函数), CClientSockDlg类的派生类
+
+	  CAboutDlg    关于对话框类
+	  CDateRangDlg 起止日期选择对话框类
+	  CWebcamDlg   网络摄像机设置对话框类
+
+1.2 动态库: UIFir, 界面层, 自定义控件
+
+    IPictureStatic IPicture接口绘制JPG图形静态类, CStatic类的派生类
+	  CTaButtonBt B型三态自定义按钮类, 使用3张贴图, CWnd类的派生类
+	  CTaButtonCt C型六态自定义按钮类, 除正常状态, 还有窗口最大化状态, CWnd类的派生类
+	  CTaButtonDt D型三态自定义按钮类, 用于模拟菜单, CWnd类的派生类
+	  CTaButtonEt E型三态自定义按钮类, 用于开闸按钮, CWnd类的派生类
+  	CTaButtonFt F型三态自定义按钮类, 用于颜色选择, CWnd类的派生类
+	  CTaButtonGt G型三态自定义按钮类, 文字和图片兼容, CWnd类的派生类
+    CTaButtonHt H型三态自定义按钮类, 在G型的基础上, 做了4个圆角, CWnd类的派生类
+    CTaButtonIt I型三态自定义按钮类, 分禁用和激活二种状态.
+
+    CTaDateTimeCtrlAt A型自定义日期时间控件 CDateTimeCtrl的派生类
+    不能键盘输入年月日, 不能在年月日上设置焦点, 只能日历选择日期. 就是为了避免键盘输入年月日不产生DTN_DATETIMECHANGE消息
+
+    CTaDlgTitleAt A型自绘标题栏对话框类, CDialogEx类的派生类
+	  性能:
+    1.使用时, 需有: ID为nID、Border为None的对话框资源.
+    2.标题栏自绘, 如: 自绘图标, 自绘标题文字
+    3.无标题按钮.
+    4.客户区空白.
+    5.窗口大小不能改变.
+
+	  CTaDlgTitleBt B型自绘标题栏对话框, CTaDlgTitleAt类的派生类
+    功能: 标题栏右上角新增1个关闭按钮.
+
+    CtaDlgTitleCt C型自绘标题栏对话框(右上角有最小化、最大化和关闭按钮), CTaDlgTitleAt类的派生类. 
+    功能: 与A型区别：
+    1.标题栏右上角新增3个按钮: 最小化、最大化和关闭按钮
+    2.窗口大小可调
+
+    CTaHeaderCtrlA A型自绘表头控件类, CHeaderCtrl类的派生类
+    ListCtrl控件默认表头不好用也不好看. 故使用自绘表头控件类美化. 可自选背景颜色, 文本颜色, 文本字体, 对齐方式和表头高度.
+
+    CTaListCtrlA A型自绘列表控件类, CListCtrl类的派生类
+    更漂亮的外观, 特点: 表头背景色渐变, 项目背景可调, 文本颜色可调
+
+    CVirtualListCtrl 虚拟列表控件类, CTaListCtrlA类的派生类
+	  CTaMemDC自定义内存DC类, CDC类的派生类, 可生成透明位图
+
+1.3 动态库: UIInfo, 界面层, 资料界面
+    单位名称
+    CInfoCompanyDlg 单位对话框类
+    CInfoCompanyAccessDlg 单机版单位对话框类, CInfoCompanyDlg类的派生类
+	  CInfoCompanySocketDlg 网络版单位对话框类, CInfoCompanyDlg类的派生类
+
+	  通道设置
+	  CInfoChannelDlg 通道设置对话框类
+	  CInfoChannelMdlDlg 通道实体对话框类
+
+	  CInfoChannelAccessDlg 单机版通道设置对话框类, CinfoChannelDlg类的派生类
+	  CInfoChannelAccessAddDlg 单机版新增通道对话框类, CinfoChannelMdlDlg类的派生类
+    CInfoChannelAccessModDlg 单机版修改通道对话框类, CinfoChannelMdlDlg类的派生类
+
+	  CInfoChannelSocketDlg 网络版通道设置对话框类, CinfoChannelDlg类的派生类
+	  CInfoChannelSocketAddDlg 网络版新增通道对话框类, CinfoChannelMdlDlg类的派生类
+    CInfoChannelSocketModDlg网络版修改通道对话框类, CinfoChannelMdlDlg类的派生类
+	
+    卡片资料
+    CInfoCardDlg 卡片资料对话框类
+    CInfoCardMdlDlg 卡片实体对话框类.
+    CInfoCardFindDlg 查找卡片对话框类
+
+    CInfoCardAccessDlg 单机版卡片资料对话框类, CInfoCardDlg类的派生类
+    CInfoCardAccessAddDlg 新增卡片对话框类, CInfoCardMdlDlg类的派生类
+    CInfoCardAccessModDlg 单机版修改卡片对话框类, CInfoCardMdlDlg类的派生类
+
+    CInfoCardSocketDlg 网络版卡片资料对话框类, CInfoCardDlg类的派生类
+    CInfoCardSocketAddDlg 网络版新增卡片对话框类, CInfoCardMdlDlg类的派生类
+    CInfoCardSocketModDlg 网络版修改卡片对话框类, CInfoCardMdlDlg类的派生类
+
+	  用户资料
+    CInfoUserDlg 用户对话框类.
+    CInfoUserMdlDlg 用户实体对话框类
+    CInfoUserFindDlg 查找用户对话框类.
+
+    CInfoUserIssueDlg 用户授权对话框类
+    CInfoUserRefundDlg 用户退款对话框类
+    CInfoUserPauseDlg 用户暂停使用对话框类
+    CInfoUserRestoreDlg 用户恢复使用对话框类
+
+    CInfoUserGetDlg 领用卡片对话框类
+    CInfoUserChangeDlg 更换卡片对话框类
+
+
+    CInfoUserAccessDlg 单机版用户对话框类, CInfoUserDlg类的派生类
+    CInfoUserAccessAddDlg 单机版新增用户对话框类, CInfoUserMdlDlg类的派生类
+    CInfoUserAccessModDlg 单机版修改用户对话框类, CInfoUserMdlDlg类的派生类
+
+    CInfoUserAccessIssueDlg 单机版用户授权对话框类, CInfoUserIssueDlg类的派生类
+    CInfoUserAccessRefundDlg 单机版用户退款对话框类, CInfoUserRefundDlg类的派生类
+    CInfoUserAccessPauseDlg 单机版用户暂停使用对话框类, CInfoUserPauseDlg类的派生类
+    CInfoUserAccessRestoreDlg 单机版用户恢复使用对话框类, CInfoUserRestoreDlg类的派生类
+
+    CInfoUserGetAccessDlg 单机版领用卡片对话框类, CInfoUserGetDlg类的派生类
+    CInfoUserAccessChangeDlg 单机版更换卡片对话框类, CInfoUserChangeDlg类的派生类
+
+
+    CInfoUserSocketDlg 网络版用户对话框类, CInfoUserDlg类的派生类
+    CInfoUserSocketAddDlg 网络版新增用户对话框类, CInfoUserMdlDlg类的派生类
+    CInfoUserSocketModDlg 网络版修改用户对话框类, CInfoUserMdlDlg类的派生类
+
+    CInfoUserSocketIssueDlg 网络版用户授权对话框类, CInfoUserIssueDlg类的派生类
+    CInfoUserSocketRefundDlg 网络版用户退款对话框类, CInfoUserRefundDlg类的派生类
+    CInfoUserSocketPauseDlg 网络版用户暂停使用对话框类, CInfoUserPauseDlg类的派生类
+    CInfoUserRestoreSocketDlg 网络版用户恢复使用对话框类, CInfoUserRestoreDlg类的派生类
+
+    CInfoUserSocketGetDlg 网络版领用卡片对话框类, CInfoUserGetDlg类的派生类
+    CInfoUserSocketChangeDlg 网络版更换卡片对话框类, CInfoUserChangeDlg类的派生类
+
+	  操作员资料
+    CInfoOperatorDlg 操作员对话框类
+    CInfoOperatorMdlDlg 操作员实体对话框类
+    CInfoOperatorFindDlg 查找操作员对话框类
+
+    CInfoOperatorAccessDlg 单机版操作员对话框类, CInfoOperatorDlg类的派生类
+    CInfoOperatorAccessAddDlg 单机版新增操作员对话框类, CInfoOperatorMdlDlg类的派生类
+    CInfoOperatorAccessModDlg 单机版修改操作员对话框类, CInfoOperatorMdlDlg类的派生类
+
+    CInfoOperatorSocketDlg 网络版操作员对话框类, CInfoOperatorDlg类的派生类
+    CInfoOperatorSocketAddDlg 网络版新增操作员对话框类, CInfoOperatorMdlDlg类的派生类
+    CInfoOperatorSocketModDlg 网络版修改操作员对话框类, CInfoOperatorMdlDlg类的派生类
+
+	  假日设置
+    CInfoHolidayDlg 假日设置对话框类
+    CInfoHolidayMdlDlg 假日实体对话框类
+    CInfoHolidayAddDlg 新增假日对话框类, CInfoHolidayMdlDlg类的派生类
+    CInfoHolidayModDlg 修改假日对话框类, CInfoHolidayMdlDlg类的派生类
+
+    CInfoHolidayAccessDlg 单机版假日设置对话框类, CInfoHolidayDlg类的派生类
+    CInfoHolidaySocketDlg 网络版假日设置对话框类, CInfoHolidayDlg类的派生类
+
+1.4 动态库: UIPrice, 界面层, 计费标准
+    CPriceSzResiTempMdlDlg 深圳住宅类临时停车收费标准对话框类
+    CPriceSzResiTempAccessCarGeDlg 深圳住宅类临时停车收费标准对话框类, 单机版, 小车.
+    CPriceSzResiTempAccessBusGeDlg 深圳住宅类临时停车收费标准对话框类, 单机版, 大车.
+    CPriceSzResiTempAccessMotoGeDlg 深圳住宅类临时停车收费标准对话框, 单机版, 摩托车.
+    CPriceSzResiTempSocketCarGeDlg 深圳住宅类临时停车收费标准对话框类, 网络版, 小车
+    CPriceSzResiTempSocketBusGeDlg 深圳住宅类临时停车收费标准对话框, 网络版, 大车
+    CPriceSzResiTempSocketMotoGeDlg 深圳住宅类临时停车收费标准对话框, 网络版, 摩托车
+
+    CPriceSzResiMonthMdlDlg 深圳住宅类月租停车收费标准对话框类
+    CPriceSzResiMonthAccessCarOpDlg 深圳住宅类月租停车收费标准对话框类, 单机版, 小车, 露天车位
+    CPriceSzResiMonthAccessCarInDlg 深圳住宅类月租停车收费标准对话框类, 单机版, 小车, 室内车位
+    CPriceSzResiMonthAccessCarPvDlg 深圳住宅类月租停车收费标准对话框类, 单机版, 小车, 私有车位
+    CPriceSzResiMonthAccessBusOpDlg 深圳住宅类月租停车收费标准对话框类, 单机版, 大车, 露天车位
+    CPriceSzResiMonthAccessMotoOpDlg 深圳住宅类月租停车收费标准对话框类, 单机版, 摩托, 露天车位
+    CPriceSzResiMonthSocketCarOpDlg 深圳住宅类月租停车收费标准对话框类, 网络版, 小车, 露天车位
+    CPriceSzResiMonthSocketCarInDlg 深圳住宅类月租停车收费标准对话框类, 网络版, 小车, 室内车位
+    CPriceSzResiMonthSocketCarPvDlg 深圳住宅类月租停车收费标准对话框类, 网络版, 小车, 私有车位
+    CPriceSzResiMonthSocketBusOpDlg 深圳住宅类月租停车收费标准对话框类, 网络版, 大车, 露天车位
+    CPriceSzResiMonthSocketMotoOpDlg 深圳住宅类月租停车收费标准对话框类, 网络版, 摩托, 露天车位
+
+    CPriceSzPublTempMdlDlg 深圳公共类临时停车收费标准对话框类
+    CPriceSzPublTempAccessCarGeDlg 深圳公共类临时停车收费标准对话框类, 单机版, 小车.
+    CPriceSzPublTempAccessBusGeDlg 深圳公共类临时停车收费标准对话框类, 单机版, 大车.
+    CPriceSzPublTempAccessVehicleGeDlg 深圳公共类临时停车收费标准对话框类, 单机版, 超大型车.
+    CPriceSzPublTempSocketCarGeDlg 深圳公共类临时停车收费标准对话框类, 网络版, 小车.
+    CPriceSzPublTempSocketBusGeDlg 深圳公共类临时停车收费标准对话框类, 网络版, 大车.
+    CPriceSzPublTempSocketVehicleGeDlg 深圳公共类临时停车收费标准对话框类, 网络版, 超大型车.
+
+1.5 动态库: UIVehicle, 界面层, 车辆
+	  车辆进出表
+    CVehicleFlowDlg 车辆出入对话框类.
+    CVehicleFlowMdlDlg 车辆进出记录实体对话框.
+    CVehicleFlowFindDlg 查找车辆进出记录对话框类
+
+    CVehicleFlowAccessDlg 单机版车辆出入对话框类, CVehicleFlowDlg类的派生类
+    CVehicleFlowAccessAddDlg 单机版新增车辆进出记录对话框类, CVehicleFlowMdlDlg类的派生类
+    CVehicleFlowAccessModDlg 单机版修改车辆进出记录对话框类, CVehicleFlowMdlDlg类的派生类
+
+    CVehicleFlowSocketDlg 网络版车辆出入对话框类, CVehicleFlowDlg类的派生类
+    CVehicleFlowSocketAddDlg 网络版新增车辆进出记录对话框类, CVehicleFlowMdlDlg类的派生类
+    CVehicleFlowSocketModDlg 网络版修改车辆进出记录对话框类, CVehicleFlowMdlDlg类的派生类
+
+	  车辆外出放行记录
+    CVehicleOutDlg 车辆外出放行对话框类
+    CVehicleOutAddDlg 新增车辆外出放行记录对话框类
+    CVehicleOutMdlDlg 车辆进出记录实体对话框类
+    CVehicleOutFindDlg 查找车辆外出放行记录对话框类
+
+    CVehicleOutAccessDlg 单机版车辆外出放行对话框.
+    CVehicleOutAccessAddDlg 单机版新增车辆外出放行记录对话框类
+    CVehicleOutAccessModDlg 单机版修改车辆外出放行记录对话框类
+    CVehicleOutAddAccessDlg 单机版新增车辆外出放行记录对话框.
+    CVehicleOutModAccessDlg 单机版修改车辆外出放行记录对话框.
+
+    CVehicleOutSocketDlg 网络版车辆外出放行对话框类
+    CVehicleOutSocketAddDlg 网络版新增车辆外出放行记录对话框类
+    CVehicleOutSocketModDlg 网络版修改车辆外出放行记录对话框.
+	
+    场内车辆表
+    CVehicleFloorDlg 场内车辆对话框类
+    CVehicleFloorMdlDlg 场内车辆实体对话框类
+    CVehicleFloorFindDlg 查找场内车辆对话框类
+
+    CVehicleFloorAccessDlg 单机版场内车辆对话框类
+    CVehicleFloorAccessAddDlg 单机版新增场内车辆对话框类
+    CVehicleFloorAccessModDlg 单机版修改场内车辆对话框类
+
+    CVehicleFloorSocketDlg 网络版场内车辆对话框类
+    CVehicleFloorSocketAddDlg 网络版新增场内车辆对话框类
+    CVehicleFloorSocketModDlg 网络版修改场内车辆对话框类
+
+1.6 动态库: UIReport, 界面层, 报表
+    操作员作业报表
+
+    临时用户缴费明细表
+
+    月租用户缴费明细表
+	  CReportMonthlyPayDlg 月租用户缴费明细表对话框类
+    CReportMonthlyPayFindDlg 月租用户缴费明细表查找对话框类.
+
+    CReportMonthlyPayAccessDlg 单机版月租用户缴费明细表对话框类
+
+    收费统计报表
+
+    卡片发行报表
+    CReportCardIssueDlg 卡片发行报表对话框类
+    CReportCardIssueFindDlg 卡片发行明细表查找对话框类
+
+    CReportCardIssueAccessDlg 单机版卡片发行报表对话框类
+
+    操作日志表
+    CReportLogDlg 日志文件对话框类
+
+
+1.7 动态库: UIOperate, 界面层, 操作
+    操作员切换
+
+    修改密码
+	  COperatePasswordDlg 修改密码对话框类
+    COperatePasswordAccessDlg 单机版修改密码对话框类
+
+    作业统计表
+
