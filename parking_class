@@ -38,7 +38,7 @@
 
 1.2 动态库: UIFir, 界面层, 自定义控件
 
-    IPictureStatic IPicture接口绘制JPG图形静态类, CStatic类的派生类
+    CIPictureStatic IPicture接口绘制JPG图形静态类, CStatic类的派生类
     CTaButtonBt B型三态自定义按钮类, 使用3张贴图, CWnd类的派生类
     CTaButtonCt C型六态自定义按钮类, 除正常状态, 还有窗口最大化状态, CWnd类的派生类
     CTaButtonDt D型三态自定义按钮类, 用于模拟菜单, CWnd类的派生类
@@ -272,48 +272,442 @@
 
     作业统计表
 
-1.8 动态库: BllFir, 业务逻辑层
+1.8 动态库: CalendarCtrl, 界面层, 日历显示
+    CTaCalendarYearAt  A型年历窗口类
+	CTaMonthCalendarAt A型月历窗口类
+	CTaWndDayAt        A型日期窗口类
+	CTaWndWeekAt       A型星期窗口类
+
+1.9 动态库: BllFir, 业务逻辑层
 
     CTableBaseBll 固定表格业务逻辑类的虚基类
     
     单位名称表
-    CInfoCompanyAccessBll 本地Access数据库单位名称表业务逻辑类
-    CInfoCompanySockBll 服务器单位名称表业务逻辑类
+    CInfoCompanyAccessBll 本地Access数据库单位名称表业务逻辑类, CTableBaseBll类的派生类
+    CInfoCompanySockBll 服务器单位名称表业务逻辑类, CTableBaseBll类的派生类
     
     通道表
-    CInfoChannelAccessBll 本地Access数据库通道表业务逻辑类
-    CInfoChannelSocketBll 服务器通道表业务逻辑类
+    CInfoChannelAccessBll 本地Access数据库通道表业务逻辑类, CTableBaseBll类的派生类
+    CInfoChannelSocketBll 服务器通道表业务逻辑类, CTableBaseBll类的派生类
     
     卡片表
-    CInfoCardAccessBll 本地Access数据库卡片表业务逻辑类
-    CInfoCardSocketBll 服务器卡片表业务逻辑类
+    CInfoCardAccessBll 本地Access数据库卡片表业务逻辑类, CTableBaseBll类的派生类
+    CInfoCardSocketBll 服务器卡片表业务逻辑类, CTableBaseBll类的派生类
     
     用户表
-    CInfoUserAccessBll 本地Access数据库用户表业务逻辑类
-    CInfoUserSocketBll 服务器用户表业务逻辑类
+    CInfoUserAccessBll 本地Access数据库用户表业务逻辑类, CTableBaseBll类的派生类
+    CInfoUserSocketBll 服务器用户表业务逻辑类, CTableBaseBll类的派生类
     
     操作员表
-    CInfoOperatorAccessBll 本地Access数据库操作员表业务逻辑类
-    CInfoOperatorSocketBll 服务器操作员表业务逻辑类
+    CInfoOperatorAccessBll 本地Access数据库操作员表业务逻辑类, CTableBaseBll类的派生类
+    CInfoOperatorSocketBll 服务器操作员表业务逻辑类, CTableBaseBll类的派生类
     
     假日表
-    CInfoHolidayAccessBll 本地Access数据库假日表业务逻辑类
-    CInfoHolidaySocketBll 服务器假日表业务逻辑类
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    CInfoHolidayAccessBll 本地Access数据库假日表业务逻辑类, CTableBaseBll类的派生类
+    CInfoHolidaySocketBll 服务器假日表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳住宅类时租停车收费表
+	CPriceSzResiTempAccessBll 本地Access数据库深圳住宅类时租停车收费表业务逻辑类, CTableBaseBll类的派生类
+	CPriceSzResiTempSocketBll 服务器深圳住宅类时租停车收费表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳住宅类月租停车收费表
+	CPriceSzResiMonthAccessBll 本地Access数据库深圳住宅类月租停车收费表业务逻辑类, CTableBaseBll类的派生类
+	CPriceSzResiMonthSocketBll 服务器深圳住宅类月租停车收费表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳公共类时租停车收费表
+	CPriceSzPublTempAccessBll 本地Access数据库深圳公共类时租停车收费表业务逻辑类, CTableBaseBll类的派生类
+	CPriceSzPublTempSocketBll 服务器深圳公共类时租停车收费表数业务逻辑类, CTableBaseBll类的派生类
+
+	卡片发行表
+	CReportCardIssueDayAccessBll 本地Access数据库卡片发行日表业务逻辑类, CTableBaseBll类的派生类
+	CReportCardIssueDaySocketBll 服务器卡片发行日表业务逻辑类, CTableBaseBll类的派生类
+
+	用户发行表
+	CReportUserIssueDayAccessBll 本地Access数据库用户发行日表业务逻辑类, CTableBaseBll类的派生类
+	CReportUserIssueDaySocketBll 服务器用户发行日表业务逻辑类, CTableBaseBll类的派生类
+
+	车辆进出表
+	CVehicleFlowDaySocketBll 本地Access数据库车辆进出日表业务逻辑类, CTableBaseBll类的派生类
+	CVehicleFlowDaySocketBll 服务器车辆进出日表业务逻辑类, CTableBaseBll类的派生类
+
+	车辆外出放行表
+	CVehicleOutDayAccessBll 本地Access数据库车辆外出放行日表业务逻辑类, CTableBaseBll类的派生类
+	CVehicleOutDaySocketBll 服务器车辆外出放行日表业务逻辑类, CTableBaseBll类的派生类
+
+	场内车辆表
+	CVehicleFloorAccessBll 本地Access数据库场内车辆表数据库业务逻辑类, CTableBaseBll类的派生类
+	CVehicleFloorSocketBll 服务器场内车辆表数据库业务逻辑类, CTableBaseBll类的派生类
+
+	CLoggerBll       日志文件业务逻辑类
+	CIPictureJPGBll  使用IPicture接口的JPG格式图片业务逻辑类
+	CCreateAccessBll 创建Access数据库和数据表业务逻辑类
+
+	CBillBaseBll 计费算法业务逻辑类的虚基类
+	CBillFreeBll 免费算法业务逻辑类, CBillBaseBll类的派生类
+	
+	CBillSzResiTempAccessBll  本地Access数据库深圳住宅类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+	CBillSzResiTempSocketBll  服务器深圳住宅类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+
+	CBillSzResiMonthAccessBll 本地Access数据库深圳住宅类停车场月租计费算法业务逻辑类, CBillBaseBll类的派生类
+	CBillSzResiMonthAccessBll 服务器深圳住宅类停车场月租计费算法业务逻辑类, CBillBaseBll类的派生类
+
+	CBillSzPublTempAccessBll  本地Access数据库深圳公共类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+	CBillSzPublTempSocketBll  服务器深圳公共类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+
+1.10 动态库: DalAccess, 数据操作层
+    CADOConnectionAccess Access数据库ADO连接类
+	CADOCommandAccess    Access数据库ADO命令类, CADOConnectionAccess类的派生类
+	CADORecordsetAccess  Access数据库ADO记录集类, CADOCommandAccess类的派生类
+	CADOXCatalogAccess   Access数据库ADOX目录类
+
+	CInfoCompanyAccessDal  单位表记录集类, CADORecordsetAccess类的派生类
+	CInfoChannelAccessDal  通道表记录集类, CADORecordsetAccess类的派生类
+	CInfoCardAccessDal     卡片表记录集类, CADORecordsetAccess类的派生类
+	CInfoUserAccessDal     用户表记录集类, CADORecordsetAccess类的派生类
+	CInfoOperatorAccessDal 操作员表记录集类, CADORecordsetAccess类的派生类
+	CInfoHolidayAccessDal  假日表记录集类, CADORecordsetAccess类的派生类
+
+	CPriceSzResiTempAccessDal  深圳住宅类时租停车收费表记录集类, CADORecordsetAccess类的派生类
+	CPriceSzResiMonthAccessDal 深圳住宅类月租停车收费表记录集类, CADORecordsetAccess类的派生类
+	CPriceSzPublTempAccessDal  深圳公共类时租停车收费表记录集类, CADORecordsetAccess类的派生类
+
+	CReportCardIssueDayAccessDal 卡片发行日表记录集类, CADORecordsetAccess类的派生类
+	CReportUserIssueDayAccessDal 用户发行日表记录集类, CADORecordsetAccess类的派生类
+
+	CVehicleFlowDayAccessDal 车辆进出日表记录集类, CADORecordsetAccess类的派生类
+	CVehicleOutDayAccessDal  车辆外出放行日表记录集类, CADORecordsetAccess类的派生类
+	CVehicleFloorAccessDal   场内车辆表记录集类, CADORecordsetAccess类的派生类
+
+1.11 动态库: DalFILEstream, 数据操作层
+    CDalLogger 日志文件数据访问类
+
+1.12 动态库: DalPicture, 数据操作层
+    CDalIPictureJPG类 使用IPicture接口的JPG格式图片类
+
+1.13 动态库: NetComm, Socket网络通讯模块
+    CSocketTang 自定义套接字类
+	CSocketClientAt A型客户端Socket(客户端, TCP方式), CSocketTang类的派生类
+    CNetProtocol 网络通信协议
+
+1.14 动态库: NetworkCamera, 网络摄像机模块
+    CWebcamera      网络摄像机虚基类
+	CDahuaWebcamera 大华网络摄像机类, CWebcamera类的派生类
+
+1.15 动态库: DahuaWin32SDK, 大华网络摄像机Win32SDK开发包
+
+1.16 动态库: ModelFir, 实体层
+    CCompanyMdl  单位实体类
+	CChannelMdl  通道实体类
+	CCardMdl     卡片实体类
+	CUserMdl     用户实体类
+	COperatorMdl 操作员实体类
+	CHolidayMdl  假日实体类
+
+	CSzResiTempMdl  深圳住宅类时租收费标准实体类
+	CSzResiMonthMdl 深圳住宅类月租收费标准实体类
+	CSzPublTempMdl  深圳公共类时租收费标准实体类
+
+	CVehicleFlowMdl  车辆进出实体类
+	CVehicleOutMdl   车辆外出放行实体类
+	CVehicleFloorMdl 场内车辆实体类
+
+	CCardIssueMdl 卡片发行实体类
+	CUserIssueMdl 用户发行实体类
+
+	CNetCmdMdl    网络命令数据类
+	CNetPacketMdl 网络接收或待发送数据包类
+
+	CDateRangeMdl 日期范围实体类
+	CLoggerMdl    日志实体类
+	CWebcamMdl    网络摄像机实体类
+	CColumnsAttributeMdl 列属性实体类
+
+1.17 动态库: CommonFir, 通用层
+    CGlobalFunction 全局函数类
+	CUIDefine 自定义常量, 变量等    
 
 
+二. 服务器端程序
+2.1 主程序: MainFace, 界面层, 程序主界面
+    CLoginDlg 登录对话框类
+
+	CPreviewWnd   视频显示子窗口
+	CContainerWnd 容器窗口类
+	CServerDlg    停车场服务器端对话框类.
+	CMainFaceDlg  主界面对话框类(用于编写菜单响应函数), CServerDlg类的派生类
+
+	CDateRangeDlg 输入时间范围对话框类
+	CWebcamDlg    网络摄像机对话框类
+	CAboutDlg     关于对话框类
+
+2.2 动态库: UIFir, 界面层, 自定义控件, 同1.2
+
+    CIPictureStatic IPicture接口绘制JPG图形静态类, CStatic类的派生类
+    CTaButtonBt B型三态自定义按钮类, 使用3张贴图, CWnd类的派生类
+    CTaButtonCt C型六态自定义按钮类, 除正常状态, 还有窗口最大化状态, CWnd类的派生类
+    CTaButtonDt D型三态自定义按钮类, 用于模拟菜单, CWnd类的派生类
+    CTaButtonEt E型三态自定义按钮类, 用于开闸按钮, CWnd类的派生类
+    CTaButtonFt F型三态自定义按钮类, 用于颜色选择, CWnd类的派生类
+    CTaButtonGt G型三态自定义按钮类, 文字和图片兼容, CWnd类的派生类
+    CTaButtonHt H型三态自定义按钮类, 在G型的基础上, 做了4个圆角, CWnd类的派生类
+    CTaButtonIt I型三态自定义按钮类, 分禁用和激活二种状态.
+
+    CTaDateTimeCtrlAt A型自定义日期时间控件 CDateTimeCtrl的派生类
+    不能键盘输入年月日, 不能在年月日上设置焦点, 只能日历选择日期. 就是为了避免键盘输入年月日不产生DTN_DATETIMECHANGE消息
+
+    CTaDlgTitleAt A型自绘标题栏对话框类, CDialogEx类的派生类
+    性能:
+    1.使用时, 需有: ID为nID、Border为None的对话框资源.
+    2.标题栏自绘, 如: 自绘图标, 自绘标题文字
+    3.无标题按钮.
+    4.客户区空白.
+    5.窗口大小不能改变.
+
+    CTaDlgTitleBt B型自绘标题栏对话框, CTaDlgTitleAt类的派生类
+    功能: 标题栏右上角新增1个关闭按钮.
+
+    CtaDlgTitleCt C型自绘标题栏对话框(右上角有最小化、最大化和关闭按钮), CTaDlgTitleAt类的派生类. 
+    功能: 与A型区别：
+    1.标题栏右上角新增3个按钮: 最小化、最大化和关闭按钮
+    2.窗口大小可调
+
+    CTaHeaderCtrlA A型自绘表头控件类, CHeaderCtrl类的派生类
+    ListCtrl控件默认表头不好用也不好看. 故使用自绘表头控件类美化. 可自选背景颜色, 文本颜色, 文本字体, 对齐方式和表头高度.
+
+    CTaListCtrlA A型自绘列表控件类, CListCtrl类的派生类
+    更漂亮的外观, 特点: 表头背景色渐变, 项目背景可调, 文本颜色可调
+
+    CVirtualListCtrl 虚拟列表控件类, CTaListCtrlA类的派生类
+    CTaMemDC自定义内存DC类, CDC类的派生类, 可生成透明位图
+
+2.3 动态库: InfoFace, 界面层, 资料界面
+    单位名称
+    CInfoCompanyDlg 单位对话框类
+  
+    通道设置
+    CInfoChannelDlg      通道设置对话框类
+    CInfoChannelMultiDlg 新增或修改通道对话框类
+	
+    卡片资料
+    CInfoCardDlg      卡片资料对话框类
+	CInfoCardMultiDlg 新增或修改卡片对话框
+	CInfoCardFindDlg  查找卡片对话框
+
+    用户资料
+    CInfoUserDlg        用户对话框类
+	CInfoUserMultiDlg   新增或修改用户对话框类
+	CInfoUserFindDlg    查找用户对话框类
+
+    CInfoUserIssueDlg   用户授权对话框类
+	CInfoUserRefundDlg  用户退款对话框类
+    CInfoUserPauseDlg   用户暂停使用对话框类
+    CInfoUserRestoreDlg 用户恢复使用对话框类
+
+    CInfoUserGetDlg     领用卡片对话框类
+    CInfoUserChangeDlg  更换卡片对话框类
+
+    操作员资料
+    CInfoOperatorDlg      操作员对话框类
+	CInfoOperatorMultiDlg 新增或修改操作员对话框
+    CInfoOperatorFindDlg  查找操作员对话框类
+
+    假日设置
+	CInfoHolidayDlg       假日设置对话框类
+	CInfoHolidayMultiDlg  新增或修改假日资料对话框类
+
+2.4 动态库: PriceFace, 界面层, 计费标准
+    CPriceSzResiCarTempGeDlg     深圳住宅类小车临时停车收费标准对话框类
+	CPriceSzResiBusTempGeDlg     深圳住宅类大车临时停车收费标准对话框类
+	CPriceSzResiMotoTempGeDlg    深圳住宅类摩托车临时停车收费标准对话框类
+
+	CPriceSzResiCarMonthOpDlg    深圳住宅类小车月租停车收费标准(露天车位)对话框类
+	CPriceSzResiBusMonthOpDlg    深圳住宅类小车月租停车收费标准(室内车位)对话框类
+	CPriceSzResiCarMonthPvDlg    深圳住宅类小车月租停车收费标准(私有车位)对话框类
+	CPriceSzResiBusMonthOpDlg    深圳住宅类大车月租停车收费标准对话框类
+	CPriceSzResiMotoMonthOpDlg   深圳住宅类摩托车月租停车收费标准对话框类
+
+	CPriceSzPublCarTempGeDlg     深圳公共类小车临时停车收费标准对话框类
+	CPriceSzPublBusTempGeDlg     深圳公共类大车临时停车收费标准对话框类
+	CPriceSzPublVehicleTempGeDlg 深圳公共类超大型车临时停车收费标准对话框类
+
+2.5 动态库: VehicleFace, 界面层, 车辆
+    车辆进出表
+    CVehicleFlowDlg     车辆出入对话框类
+	CVehicleFlowAddDlg  新增车辆进出记录对话框类
+	CVehicleFlowModDlg  修改车辆进出记录对话框类
+	CVehicleFlowFindDlg 查找车辆进出记录对话框类
+
+    车辆外出放行记录
+	CVehicleOutDlg      车辆外出放行对话框类
+	CVehicleOutFindDlg  新增车辆外出放行记录对话框类
+	CVehicleOutModDlg   修改车辆外出放行记录对话框类
+	CVehicleOutFindDlg  查找车辆外出放行记录对话框类
+	
+    场内车辆表
+	CVehicleFloorDlg     场内车辆对话框类
+	CVehicleFloorAddDlg  新增场内车辆对话框类
+	CVehicleFloorModDlg  修改场内车辆对话框类
+	CVehicleFloorFindDlg 查找场内车辆对话框类
+
+2.6 动态库: ReportFace, 界面层, 报表
+    操作员作业报表
+
+    临时用户缴费明细表
+
+    月租用户缴费明细表
+    CReportMonthlyPayDlg     月租用户缴费明细表对话框类
+    CReportMonthlyPayFindDlg 月租用户缴费明细表查找对话框类.
+
+    收费统计报表
+
+    卡片发行报表
+    CReportCardIssueDlg     卡片发行报表对话框类
+    CReportCardIssueFindDlg 卡片发行明细表查找对话框类
+
+    操作日志表
+    CReportLogDlg 日志文件对话框类
 
 
+2.7 动态库: OperateFace, 界面层, 操作
+    操作员切换
 
+    修改密码
+    COperatePasswordDlg 修改密码对话框类
 
+    作业统计表
 
+2.8 动态库: CalendarCtrl, 界面层, 日历显示
+    CTaCalendarYearAt  A型年历窗口类
+	CTaMonthCalendarAt A型月历窗口类
+	CTaWndDayAt        A型日期窗口类
+	CTaWndWeekAt       A型星期窗口类
 
+2.9 动态库: BllFir, 业务逻辑层
 
+    CTableBaseBll 固定表格业务逻辑类的虚基类
+    
+    单位名称表
+	CInfoCompanyBll 单位名称表业务逻辑类, CTableBaseBll类的派生类
+    
+    通道表
+	CInfoChannelBll 通道表业务逻辑类, CTableBaseBll类的派生类
+     
+    卡片表
+	CInfoCardBll    卡片表业务逻辑类, CTableBaseBll类的派生类
+    
+    用户表
+	CInfoUserBll    用户表业务逻辑类, CTableBaseBll类的派生类
+    
+    操作员表
+	CInfoOperatorBll 操作员表业务逻辑类, CTableBaseBll类的派生类
+    
+    假日表
+	CInfoHolidayBll  假日表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳住宅类时租停车收费表
+	CPriceSzResiTempBll  深圳住宅类时租停车收费表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳住宅类月租停车收费表
+	CPriceSzResiMonthBll 深圳住宅类月租停车收费表业务逻辑类, CTableBaseBll类的派生类
+
+	深圳公共类时租停车收费表
+	CPriceSzPublTempBll  深圳公共类时租停车收费表业务逻辑类, CTableBaseBll类的派生类
+
+	卡片发行表
+	CReportCardIssueDayBll 卡片发行日表业务逻辑类, CTableBaseBll类的派生类
+
+	用户发行表
+	CReportUserIssueDayBll 用户发行日表业务逻辑类, CTableBaseBll类的派生类
+
+	车辆进出表
+	CVehicleFlowDayBll     车辆进出日表业务逻辑类, CTableBaseBll类的派生类
+
+	车辆外出放行表
+	CVehicleOutDayBll      车辆外出放行日表业务逻辑类, CTableBaseBll类的派生类
+
+	场内车辆表
+	CVehicleFloorBll       场内车辆表业务逻辑类, CTableBaseBll类的派生类
+
+	CLoggerBll       日志文件业务逻辑类
+	CIPictureJPGBll  使用IPicture接口的JPG格式图片业务逻辑类
+	CCreateMSSQLBll  创建MSSQL数据库和数据表业务逻辑类
+
+	CBillBaseBll 计费算法业务逻辑类的虚基类
+	CBillFreeBll 免费算法业务逻辑类, CBillBaseBll类的派生类
+
+	CBillSzResiTempBll  深圳住宅类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+	CBillSzResiMonthBll 深圳住宅类停车场月租计费算法业务逻辑类, CBillBaseBll类的派生类
+	CBillSzPublTempBll  深圳公共类停车场时租计费算法业务逻辑类, CBillBaseBll类的派生类
+
+2.10 动态库: DalMSSQL, 数据操作层
+    CADOConnectionMssql ADO数据库连接类
+	CADOCommandMssql    ADO数据库命令类, CADOConnectionMssql类的派生类
+	CADORecordsetMssql  ADO数据库记录集类, CADOCommandMssql类的派生类
+
+	CInfoCompanyMssqlDal  单位表记录集类, CADORecordsetMssql类的派生类
+	CInfoChannelMssqlDal  通道表记录集类, CADORecordsetMssql类的派生类
+	CInfoCardMssqlDal     卡片表记录集类, CADORecordsetMssql类的派生类
+	CInfoUserMssqlDal     用户表记录集类, CADORecordsetMssql类的派生类
+	CInfoOperatorMssqlDal 操作员表记录集类, CADORecordsetMssql类的派生类
+	CInfoHolidayMssqlDal  假日表记录集类, CADORecordsetMssql类的派生类
+
+	CPriceSzResiTempMssqlDal  深圳住宅类时租停车收费表记录集类, CADORecordsetMssql类的派生类
+	CPriceSzResiMonthMssqlDal 深圳住宅类月租停车收费表记录集类, CADORecordsetMssql类的派生类
+	CPriceSzPublTempMssqlDal  深圳公共类时租停车收费表记录集类, CADORecordsetMssql类的派生类
+
+	CReportCardIssueDayMssqlDal 卡片发行表记录集类, CADORecordsetMssql类的派生类
+	CReportUserIssueDayMssqlDal 用户发行表记录集类, CADORecordsetMssql类的派生类
+
+	CVehicleFlowDayMssqlDal 车辆进出日表记录集类, CADORecordsetMssql类的派生类
+	CVehicleOutDayMssqlDal  车辆外出放行日表记录集类, CADORecordsetMssql类的派生类
+	CVehicleFloorMssqlDal   场内车辆表记录集类, CADORecordsetMssql类的派生类
+
+2.11 动态库: DalFILEstream, 数据操作层
+    CDalLogger 日志文件数据访问类
+
+2.12 动态库: DalPicture, 数据操作层
+    CDalIPictureJPG类 使用IPicture接口的JPG格式图片类
+
+2.13 动态库: NetComm, Socket网络通讯模块
+    CSocketTang 自定义套接字类
+	CSocketListenAt A型侦听Socket(服务器端, TCP方式), CSocketTang类的派生类
+	CSocketAcceptAt A型应答Socket(服务器端, TCP方式), CSocketTang类的派生类
+    CNetProtocol 网络通信协议
+
+2.14 动态库: NetworkCamera, 网络摄像机模块
+    CWebcamera      网络摄像机虚基类
+	CDahuaWebcamera 大华网络摄像机类, CWebcamera类的派生类
+
+2.15 动态库: DahuaWin32SDK, 大华网络摄像机Win32SDK开发包
+
+2.16 动态库: ModelFir, 实体层
+    CCompanyMdl  单位实体类
+	CChannelMdl  通道实体类
+	CCardMdl     卡片实体类
+	CUserMdl     用户实体类
+	COperatorMdl 操作员实体类
+	CHolidayMdl  假日实体类
+
+	CSzResiTempMdl  深圳住宅类时租收费标准实体类
+	CSzResiMonthMdl 深圳住宅类月租收费标准实体类
+	CSzPublTempMdl  深圳公共类时租收费标准实体类
+
+	CVehicleFlowMdl  车辆进出实体类
+	CVehicleOutMdl   车辆外出放行实体类
+	CVehicleFloorMdl 场内车辆实体类
+
+	CCardIssueMdl 卡片发行实体类
+	CUserIssueMdl 用户发行实体类
+
+	CNetCmdMdl    网络命令数据类
+	CNetPacketMdl 网络接收或待发送数据包类
+
+	CDateRangeMdl 日期范围实体类
+	CLoggerMdl    日志实体类
+	CWebcamMdl    网络摄像机实体类
+	CColumnsAttributeMdl 列属性实体类
+
+2.17 动态库: CommonFir, 通用层
+    CGlobalFunction 全局函数类
+	CUIDefine 自定义常量, 变量等
+  
